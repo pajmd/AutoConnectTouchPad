@@ -13,24 +13,29 @@ import java.util.List;
 
 public class Utils {
 
-    private static final String FIFI_BRIN_DACIER = "\"fifibrindacier3_EXT\"";
-
     public static WifiManager reconectWifi(String TAG,  Context app_context) {
         WifiManager wifi_manager = app_context.getSystemService(WifiManager.class);
 
         List<WifiConfiguration> confs = wifi_manager.getConfiguredNetworks();
         WifiConfiguration conf = null;
         if (confs != null) {
+            StringBuilder sidb = new StringBuilder("\"")
+                    .append(app_context.getResources().getString(R.string.fifi_name))
+                    .append("\"");
+            String sid = sidb.toString();
             for (WifiConfiguration confi : confs) {
-                if (confi.SSID.equals(FIFI_BRIN_DACIER)) {
+                if (confi.SSID.equals(sid)) {
                     conf = confi;
                     break;
                 }
             }
             if (conf == null) {
                 conf = new WifiConfiguration();
-                conf.SSID = FIFI_BRIN_DACIER;
-                conf.preSharedKey = "\"sshphilippe\"";
+                conf.SSID = sid;
+                StringBuilder key = new StringBuilder("\"")
+                        .append(app_context.getResources().getString(R.string.fifi_pass))
+                        .append("\"");
+                conf.preSharedKey = key.toString();
                 Log.v(TAG, "Connecting to: " + conf.toString());
             }
             int net_id = wifi_manager.addNetwork(conf);
