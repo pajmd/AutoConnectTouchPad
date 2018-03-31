@@ -1,6 +1,7 @@
 package com.pjmd.wifimanager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
@@ -31,7 +32,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         displayWifis();
-        registerReceiver();
+        //registerReceiver();
+        startSevice();
+    }
+
+    private void startSevice() {
+        Context context = getApplicationContext();
+        Intent intentService = new Intent(context, WifiService.class);
+        Log.d(TAG, "Start wifi service");
+        context.startService(intentService);
     }
 
     private void displayWifis() {
