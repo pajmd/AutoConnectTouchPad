@@ -14,6 +14,8 @@ import java.util.TreeSet;
 
 /**
  * Created by pjmd on 27/03/18.
+ * Sends notification and clears old ones.
+ * Notification ID are predetermined 10, 11 ...
  */
 
 public class NotificationSender {
